@@ -1,0 +1,19 @@
+apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/javafx.plugin'
+apply plugin: 'idea'
+
+javafx {
+    mainClass = 'com.slevinbe.eventmanager.Main'
+}
+
+repositories {
+    mavenCentral()
+
+}
+
+dependencies {
+    compile group: 'com.google.inject', name: 'guice', version: '3.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.4'
+}

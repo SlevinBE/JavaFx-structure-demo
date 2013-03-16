@@ -1,0 +1,117 @@
+.root {
+    -fx-background-color: #A60101;
+    -fx-font-family: "Arial";
+}
+
+.button {
+    -fx-background-color: #CA0301;
+    -fx-background-radius: 3;
+    -fx-border-color: #A60101;
+    -fx-border-radius: 3;
+    -fx-text-fill: #FFFFFE;
+    -fx-padding: 3 10 3 10;
+}
+
+.button:hover {
+    -fx-border-color: #FFFFFE;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+}
+
+.list-cell .label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFE;
+}
+
+.list-cell:selected .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFFFFE;
+}
+
+.eventListItemContainer {
+    -fx-background-color: rgba(111, 1, 1, 0.9);
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: #2B0202;
+    -fx-border-width: 2px;
+}
+
+.list-cell:selected .eventListItemContainer {
+    -fx-background-color: rgba(43, 2, 2, 0.9);
+    -fx-border-color: #6F0101;
+}
+
+.eventListItemContainer .label {
+    -fx-alignment: bottom-left;
+}
+
+.eventListItemContainer .eventItemHeader {
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+.eventListItemContainer .eventItemLocationLabel {
+    -fx-font-weight: normal;
+    -fx-font-size: 10px;
+}
+
+.eventListItemContainer .eventItemDateLabel {
+    -fx-font-weight: normal;
+    -fx-font-size: 10px;
+}
+
+.eventListItemContainer .eventItemDescriptionLabel {
+    -fx-font-weight: normal;
+    -fx-font-size: 13px;
+}
+
+.detailPaneStyle {
+    -fx-background-color: rgba(111, 1, 1, 0.9);
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: #2B0202;
+    -fx-border-width: 2px;
+}
+
+.eventDetailsHeader {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #2B0202;
+}
+
+.detailPaneStyle .label{
+    -fx-text-fill: #FEFAFA;
+}
+
+.detailPaneStyle .fieldLabelStyle {
+    -fx-font-weight: bold;
+}
+
+.detailPaneStyle .fieldStyle {
+    -fx-background-color: #FEFAFA;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: #2B0202;
+    -fx-text-fill: #000000;
+    -fx-padding: 3 5 3 5;
+}
+
+.declineReasonPanel {
+    -fx-background-color: #2B0202;
+    -fx-background-radius: 3;
+    -fx-border-radius: 3;
+    -fx-border-color: #2B0202;
+    -fx-text-fill: #FFFFFE;
+    -fx-padding: 5;
+}
+
+.declineReasonPanel .label {
+    -fx-text-fill: #FFFFFE;
+    -fx-font-weight: bold;
+}
