@@ -11,8 +11,26 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.google.inject', name: 'guice', version: '3.0'
+    compile group: 'org.roboguice', name: 'roboguice', version: '2.0'
 }
+
+//gradle -PDIR=E:/Users/Yennick_2/Development/JavaFx/JavaFx-structure-demo/build/android -PNAME=ANDROID_JAVAFX -PANDROID_SDK="E:/Program Files/sdks/adt-bundle-windows/sdk" -PPACKAGE=com.slevinbe.eventmanager -PJFX_SDK="E:/Program Files/sdks/Javafx-android-sdk-b1" -PJFX_APP=E:/Users/Yennick_2/Development/JavaFx/JavaFx-structure-demo/build/distributions -PJFX_MAIN=com.slevinbe.eventmanager.Main createProject
+/*StartParameter commandLineArguments = new StartParameter();
+commandLineArguments.setSystemPropertiesArgs([
+        'DIR': 'E:\\Users\\Yennick_2\\Development\\JavaFx\\JavaFx-structure-demo\\build\\android',
+        'NAME': 'ANDROID_JAVAFX',
+        'ANDROID_SDK': "E:/Program Files/sdks/adt-bundle-windows/sdk",
+        'PACKAGE': "com.slevinbe.eventmanager",
+        'JFX_SDK': 'E:\\Program Files\\sdks\\Javafx-android-sdk-b1',
+        'JFX_APP': 'E:\\Users\\Yennick_2\\Development\\JavaFx\\JavaFx-structure-demo\\build\\distributions',
+        'JFX_MAIN': 'com.slevinbe.eventmanager.MAIN'
+])
+
+task buildAndroid(type: GradleBuild, dependsOn: 'jfxDeploy') {
+    buildFile = 'E:\\Program Files\\sdks\\Javafx-android-sdk-b1\\android-tools\\build.gradle'
+    tasks = ['createProject']
+    startParameter = commandLineArguments
+}*/
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.4'

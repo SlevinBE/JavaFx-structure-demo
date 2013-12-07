@@ -24,7 +24,7 @@ public class EventDetailView implements IEventDetailView {
 
     private Pane view;
     private Pane detailPanel;
-    private GridPane form;
+    private VBox form;
     private Label nameField;
     private Label locationField;
     private Label descriptionField;
@@ -60,22 +60,20 @@ public class EventDetailView implements IEventDetailView {
             mediator.init();
         }
 
+        detailPanel.prefWidthProperty().bind(view.widthProperty());
+        detailPanel.prefHeightProperty().bind(view.heightProperty());
+
+        form.prefWidthProperty().bind(detailPanel.widthProperty());
+
         return view;
     }
 
-    private GridPane createForm() {
-        form = GridPaneBuilder.create()
-                .hgap(10)
-                .vgap(10)
+    private VBox createForm() {
+        form = VBoxBuilder.create()
+                .spacing(10)
                 .padding(new Insets(25))
                 .styleClass("detailPaneStyle")
                 .build();
-
-        ColumnConstraints column1 = new ColumnConstraints(300);
-        ColumnConstraints column2 = new ColumnConstraints(300);
-
-        form.getColumnConstraints().addAll(column1, column2);
-
 
         Label nameLabel = LabelBuilder.create()
                 .text(translationProvider.getString("eventDetails.label.name"))
@@ -138,14 +136,20 @@ public class EventDetailView implements IEventDetailView {
         acceptButton = ButtonBuilder.create()
                 .text(translationProvider.getString("eventDetails.button.accept"))
                 .onMouseClicked(new AcceptButtonClickHandler())
+                .maxWidth(Double.MAX_VALUE)
+                .maxHeight(Double.MAX_VALUE)
                 .build();
         declineButton = ButtonBuilder.create()
                 .text(translationProvider.getString("eventDetails.button.decline"))
                 .onMouseClicked(new DeclineButtonClickHandler())
+                .maxWidth(Double.MAX_VALUE)
+                .maxHeight(Double.MAX_VALUE)
                 .build();
         backButton = ButtonBuilder.create()
                 .text(translationProvider.getString("eventDetails.button.back"))
                 .onMouseClicked(new BackButtonClickHandler())
+                .maxWidth(Double.MAX_VALUE)
+                .maxHeight(Double.MAX_VALUE)
                 .build();
         HBox buttonBox = HBoxBuilder.create()
                 .children(
@@ -153,55 +157,69 @@ public class EventDetailView implements IEventDetailView {
                         declineButton,
                         acceptButton
                 )
+                .prefHeight(70)
                 .spacing(5)
-                .alignment(Pos.BASELINE_RIGHT)
+                .alignment(Pos.CENTER)
                 .build();
+        buttonBox.prefWidthProperty().bind(form.widthProperty());
+        HBox.setHgrow(backButton, Priority.ALWAYS);
+        HBox.setHgrow(declineButton, Priority.ALWAYS);
+        HBox.setHgrow(acceptButton, Priority.ALWAYS);
 
-        form.add(nameLabel, 0, 0);
-        form.add(nameField, 0, 1);
-        form.add(locationLabel, 1, 0);
-        form.add(locationField, 1, 1);
-        form.add(startTimeLabel, 0, 2);
-        form.add(startTimeField, 0, 3);
-        form.add(endTimeLabel, 1, 2);
-        form.add(endTimeField, 1, 3);
-        form.add(eventTypeLabel, 0, 4);
-        form.add(eventTypeField, 0, 5);
-        form.add(createdByLabel, 1, 4);
-        form.add(createdByField, 1, 5);
-        form.add(descriptionLabel, 0, 6);
-        form.add(descriptionField, 0, 7, 2, 1);
-        form.add(buttonBox, 0, 8, 2, 1);
+        form.getChildren().addAll(
+                nameLabel,
+                nameField,
+                locationLabel,
+                locationField,
+                startTimeLabel,
+                startTimeField,
+                endTimeLabel,
+                endTimeField,
+                eventTypeLabel,
+                eventTypeField,
+                descriptionLabel,
+                descriptionField,
+                buttonBox);
 
         return form;
     }
 
     public Pane createDeclineEventPane() {
+        Button cancelButton;
+        Button confirmButton;
+
         declineConfirmPanel = VBoxBuilder.create()
-                .prefWidth(400)
                 .spacing(4)
                 .styleClass("declineReasonPanel")
                 .children(
                         LabelBuilder.create()
                                 .text(translationProvider.getString("eventDetails.label.declineReason"))
-                                .styleClass("fieldLabelStyle")
+                                .styleClass("eventDetailsHeader")
                                 .build(),
                         declineReasonField = TextAreaBuilder.create()
                                 .build(),
                         HBoxBuilder.create()
                             .spacing(5)
-                            .alignment(Pos.BASELINE_RIGHT)
+                            .prefHeight(70)
+                            .alignment(Pos.CENTER)
                             .children(
-                                    ButtonBuilder.create()
+                                    cancelButton = ButtonBuilder.create()
                                             .text(translationProvider.getString("eventDetails.button.cancel"))
                                             .onMouseClicked(new CancelEventDeclineHandler())
+                                            .maxWidth(Double.MAX_VALUE)
+                                            .maxHeight(Double.MAX_VALUE)
                                             .build(),
-                                    ButtonBuilder.create()
+                                    confirmButton = ButtonBuilder.create()
                                             .text(translationProvider.getString("eventDetails.button.decline"))
                                             .onMouseClicked(new DeclineConfirmButtonClickHandler())
+                                            .maxWidth(Double.MAX_VALUE)
+                                            .maxHeight(Double.MAX_VALUE)
                                             .build()
                             ).build()
                 ).build();
+
+        HBox.setHgrow(cancelButton, Priority.ALWAYS);
+        HBox.setHgrow(confirmButton, Priority.ALWAYS);
 
         declineConfirmPanel.layoutXProperty().bind(
                 detailPanel.layoutXProperty().add(
@@ -255,6 +273,7 @@ public class EventDetailView implements IEventDetailView {
         public void handle(MouseEvent mouseEvent) {
             if(declineConfirmPanel == null) {
                 createDeclineEventPane();
+                declineConfirmPanel.prefWidthProperty().bind(view.widthProperty().multiply(.8));
             }
 
             view.getChildren().add(declineConfirmPanel);

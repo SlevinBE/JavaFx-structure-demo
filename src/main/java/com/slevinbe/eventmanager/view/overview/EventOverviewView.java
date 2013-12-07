@@ -33,8 +33,6 @@ public class EventOverviewView implements IEventOverviewView {
     public Pane getView() {
         if(view == null) {
             view = PaneBuilder.create()
-                    .prefWidth(900)
-                    .prefHeight(700)
                     .padding(new Insets(5))
                     .children(
                             eventList = eventListView.getView()
@@ -46,7 +44,7 @@ public class EventOverviewView implements IEventOverviewView {
             hideEventListTransition = FadeTransitionBuilder.create()
                     .node(eventList)
                     .byValue(-1)
-                    .duration(new Duration(300))
+                    .duration(new Duration(600))
                     .interpolator(Interpolator.EASE_OUT)
                     .autoReverse(true)
                     .build();
@@ -54,7 +52,7 @@ public class EventOverviewView implements IEventOverviewView {
             showEventListTransition = FadeTransitionBuilder.create()
                     .node(eventList)
                     .byValue(1)
-                    .duration(new Duration(300))
+                    .duration(new Duration(600))
                     .interpolator(Interpolator.EASE_OUT)
                     .autoReverse(true)
                     .build();
@@ -96,23 +94,22 @@ public class EventOverviewView implements IEventOverviewView {
     private void initDetailsPane() {
         if(detailsPane == null) {
             detailsPane = eventDetailView.getView();
-            detailsPane.setLayoutY(30);
-            detailsPane.setLayoutX(30);
+            detailsPane.prefWidthProperty().bind(view.widthProperty().multiply(.95));
+            detailsPane.prefHeightProperty().bind(view.heightProperty());
 
             hideDetailsPaneTransition = TranslateTransitionBuilder.create()
                     .node(detailsPane)
-                    .fromX(0)
                     .toX(view.getWidth())
                     .duration(new Duration(300))
-                    .interpolator(Interpolator.EASE_IN)
+                    .interpolator(Interpolator.LINEAR)
                     .build();
 
             showDetailsPaneTransition = TranslateTransitionBuilder.create()
                     .node(detailsPane)
                     .fromX(view.getWidth())
-                    .toX(0)
+                    .toX(view.widthProperty().multiply(.025).doubleValue())
                     .duration(new Duration(300))
-                    .interpolator(Interpolator.EASE_IN)
+                    .interpolator(Interpolator.LINEAR)
                     .build();
         }
     }
